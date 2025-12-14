@@ -1,0 +1,17 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import ProfessionalsManager from '../../components/admin/ProfessionalsManager';
+import { Database } from '../../lib/db';
+
+const db = new Database(Astro.locals.runtime.env.DB);
+const professionals = await db.getProfessionals(false);
+const services = await db.getServices({ isActive: true });
+---
+
+<AdminLayout title="Profissionais">
+  <ProfessionalsManager 
+    client:load
+    professionals={professionals}
+    services={services}
+  />
+</AdminLayout>

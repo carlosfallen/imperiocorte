@@ -1,0 +1,113 @@
+---
+const { user } = Astro.locals;
+---
+
+<header class="header">
+  <div class="container">
+    <a href="/" class="logo">
+      <span class="logo-text">Império</span>
+      <span class="logo-accent">Corte</span>
+    </a>
+    <nav class="nav">
+      <a href="/">Início</a>
+      <a href="/catalogo">Catálogo</a>
+      <a href="/agendar">Agendar</a>
+      {user ? (
+        <a href="/cliente" class="nav-account">Minha Conta</a>
+      ) : (
+        <a href="/login" class="nav-login">Entrar</a>
+      )}
+    </nav>
+    <button class="mobile-toggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-gray-200);
+    z-index: 100;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .logo-text {
+    color: var(--color-gray-900);
+  }
+
+  .logo-accent {
+    color: var(--color-gold);
+  }
+
+  .nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav a:hover {
+    color: var(--color-gold);
+  }
+
+  .nav-account, .nav-login {
+    padding: 0.5rem 1.25rem;
+    background: var(--color-gold);
+    color: var(--color-white);
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+
+  .nav-account:hover, .nav-login:hover {
+    background: var(--color-gold-dark);
+    color: var(--color-white);
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+  }
+
+  .mobile-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-gray-900);
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      display: none;
+    }
+    .mobile-toggle {
+      display: flex;
+    }
+  }
+</style>

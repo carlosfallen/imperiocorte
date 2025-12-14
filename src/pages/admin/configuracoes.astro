@@ -1,0 +1,25 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import SettingsManager from '../../components/admin/SettingsManager';
+import { Database } from '../../lib/db';
+
+const db = new Database(Astro.locals.runtime.env.DB);
+
+const settings = {
+  salon_name: await db.getSetting('salon_name') || 'Império Corte',
+  salon_address: await db.getSetting('salon_address') || '',
+  whatsapp_number: await db.getSetting('whatsapp_number') || '',
+  instagram_url: await db.getSetting('instagram_url') || '',
+  business_hours_start: await db.getSetting('business_hours_start') || '09:00',
+  business_hours_end: await db.getSetting('business_hours_end') || '19:00',
+  buffer_time_minutes: await db.getSetting('buffer_time_minutes') || '15',
+  min_advance_hours: await db.getSetting('min_advance_hours') || '2',
+  max_cancel_hours: await db.getSetting('max_cancel_hours') || '24',
+  auto_confirm: await db.getSetting('auto_confirm') || '0',
+  max_daily_bookings: await db.getSetting('max_daily_bookings') || '50'
+};
+---
+
+<AdminLayout title="Configurações">
+  <SettingsManager client:load settings={settings} />
+</AdminLayout>

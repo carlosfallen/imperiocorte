@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Database } from '../lib/db';
+
+const db = new Database(Astro.locals.runtime.env.DB);
+const featuredServices = await db.getServices({ isFeatured: true, isActive: true });
+const categories = await db.getCategories();
+---
+
+<BaseLayout title="Início">
+  <Header />
+  
+  <main>
+    <section class="hero">
+      <div class="hero-decoration"></div>
+      <div class="container">
+        <h1 class="hero-title">Seu visual no padrão luxo</h1>
+        <p class="hero-subtitle">Profissionais experientes, ambiente premium e o melhor atendimento da região</p>
+        <div class="hero-cta">
+          <a href="/agendar" class="btn btn-primary">Agendar agora</a>
+          <a href="/catalogo" class="btn btn-secondary">Ver catálogo</a>
+        </div>
+        <div class="scroll-indicator">
+          <span>Role para baixo</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 5v14M19 12l-7 7-7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="differentials">
+      <div class="container">
+        <h2 class="section-title">Por que escolher o Império Corte</h2>
+        <div class="differentials-grid">
+          <div class="differential-card">
+            <div class="differential-icon">✨</div>
+            <h3>Profissionais Qualificados</h3>
+            <p>Equipe treinada e experiente, sempre atualizada com as últimas tendências</p>
+          </div>
+          <div class="differential-card">
+            <div class="differential-icon">🏆</div>
+            <h3>Produtos Premium</h3>
+            <p>Utilizamos apenas produtos de alta qualidade para garantir os melhores resultados</p>
+          </div>
+          <div class="differential-card">
+            <div class="differential-icon">⏰</div>
+            <h3>Pontualidade</h3>
+            <p>Valorizamos seu tempo. Agendamentos respeitados rigorosamente</p>
+          </div>
+          <div class="differential-card">
+            <div class="differential-icon">🛡️</div>
+            <h3>Higiene Impecável</h3>
+            <p>Protocolos rigorosos de limpeza e esterilização em todos os procedimentos</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured-services">
+      <div class="container">
+        <h2 class="section-title">Serviços em Destaque</h2>
+        <div class="services-grid">
+          {featuredServices.map(service => (
+            <div class="service-card">
+              <div class="service-image">
+                {service.cover_image ? (
+                  <img src={service.cover_image} alt={service.name} loading="lazy" />
+                ) : (
+                  <div class="service-placeholder"></div>
+                )}
+              </div>
+              <div class="service-content">
+                <h3>{service.name}</h3>
+                <p class="service-duration">⏱️ {service.duration_minutes} minutos</p>
+                <p class="service-price">A partir de R$ {service.price.toFixed(2)}</p>
+                <a href={`/agendar?servico=${service.id}`} class="btn btn-small">Agendar</a>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="services-cta">
+          <a href="/catalogo" class="btn btn-secondary">Ver todos os serviços</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <div class="container">
+        <h2 class="section-title">O que nossos clientes dizem</h2>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>"Atendimento impecável! Ambiente elegante e profissionais super atenciosos. Saí de lá me sentindo renovada."</p>
+            <p class="testimonial-author">— Ana Silva</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>"Melhor barbearia da região. Corte perfeito, barba bem feita e um café excelente enquanto espero."</p>
+            <p class="testimonial-author">— Carlos Mendes</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>"Faço minhas unhas aqui há anos. Nunca me decepcionaram. Qualidade e cuidado sempre!"</p>
+            <p class="testimonial-author">— Mariana Costa</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-final">
+      <div class="container">
+        <h2>Pronto para transformar seu visual?</h2>
+        <p>Agende seu horário agora e experimente o padrão luxo</p>
+        <a href="/agendar" class="btn btn-primary btn-large">Agendar agora</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+</style>

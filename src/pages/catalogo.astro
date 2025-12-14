@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CatalogFilters from '../components/CatalogFilters';
+import { Database } from '../lib/db';
+
+const db = new Database(Astro.locals.runtime.env.DB);
+const categories = await db.getCategories();
+const services = await db.getServices({ isActive: true });
+---
+
+<BaseLayout title="Catálogo de Serviços">
+  <Header />
+  
+  <main class="catalog-page">
+    <div class="container">
+      <CatalogFilters 
+        client:load 
+        categories={categories} 
+        services={services} 
+      />
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

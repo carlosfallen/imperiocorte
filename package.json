@@ -1,0 +1,31 @@
+{
+  "name": "imperio-corte",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev --host",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "npm run build && wrangler pages deploy dist",
+    "db:migrate": "wrangler d1 execute imperio-corte-db --file=./migrations/schema.sql",
+    "db:seed-admin": "wrangler d1 execute imperio-corte-db --local --file=./migrations/create-admin.sql",
+    "db:create-admin": "node scripts/create-admin.js",
+    "db:test-admin": "node scripts/test-admin.js"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^11.0.0",
+    "@astrojs/solid-js": "^4.0.0",
+    "astro": "^4.15.0",
+    "bcryptjs": "^2.4.3",
+    "jose": "^5.0.0",
+    "nanoid": "^5.0.0",
+    "solid-js": "^1.8.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.0.0",
+    "@types/bcryptjs": "^2.4.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.0.0",
+    "wrangler": "^3.0.0"
+  }
+}

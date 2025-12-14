@@ -1,0 +1,88 @@
+---
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-section">
+        <h3 class="footer-logo">
+          <span>Império</span>
+          <span class="accent">Corte</span>
+        </h3>
+        <p>Seu visual no padrão luxo</p>
+      </div>
+      <div class="footer-section">
+        <h4>Contato</h4>
+        <p>WhatsApp: (11) 99999-9999</p>
+        <p>Rua Exemplo, 123 - São Paulo, SP</p>
+      </div>
+      <div class="footer-section">
+        <h4>Horários</h4>
+        <p>Segunda a Sexta: 09h - 19h</p>
+        <p>Sábado: 09h - 17h</p>
+      </div>
+      <div class="footer-section">
+        <h4>Redes Sociais</h4>
+        <a href="https://instagram.com/imperiocorte" target="_blank">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Império Corte. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-gray-900);
+    color: var(--color-white);
+    padding: 3rem 1.5rem 1.5rem;
+    margin-top: 6rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .accent {
+    color: var(--color-gold);
+  }
+
+  .footer-section h4 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-gold);
+  }
+
+  .footer-section p, .footer-section a {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--color-gray-300);
+  }
+
+  .footer-section a:hover {
+    color: var(--color-gold);
+  }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: var(--color-gray-300);
+    font-size: 0.85rem;
+  }
+</style>

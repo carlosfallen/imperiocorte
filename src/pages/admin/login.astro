@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+if (Astro.locals.admin) {
+  return Astro.redirect('/admin');
+}
+---
+
+<BaseLayout title="Admin Login">
+  <main class="login-page">
+    <div class="login-container">
+      <div class="login-card">
+        <div class="login-header">
+          <h1>Império<span>Corte</span></h1>
+          <p>Painel Administrativo</p>
+        </div>
+        
+        <form id="loginForm" class="login-form">
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" name="email" required placeholder="admin@imperiocorte.com">
+          </div>
+          
+          <div class="form-group">
+            <label>Senha</label>
+            <input type="password" name="password" required placeholder="••••••••">
+          </div>
+          
+          <div id="error" class="error-message" style="display: none;"></div>
+          
+          <button type="submit" class="btn-login">Entrar</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <style>
+  </style>
+
+  <script>
+    const form = document.getElementById('loginForm') as HTMLFormElement;
+    const error = document.getElementById('error') as HTMLDivElement;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      const email = formData.get('email');
+      const password = formData.get('password');
+
+      try {
+        const response = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json() as { error?: string; success?: boolean };
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Erro ao fazer login');
+        }
+
+        window.location.href = '/admin';
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Erro desconhecido';
+        error.textContent = errorMessage;
+        error.style.display = 'block';
+      }
+    });
+  </script>
+</BaseLayout>

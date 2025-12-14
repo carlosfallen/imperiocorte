@@ -1,0 +1,302 @@
+.container {
+  max-width: 1400px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.header p {
+  color: var(--color-gray-700);
+}
+
+.view-toggle {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--color-white);
+  padding: 0.25rem;
+  border-radius: 8px;
+}
+
+.view-toggle button {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-weight: 600;
+  color: var(--color-gray-700);
+  transition: all 0.2s;
+}
+
+.view-toggle button.active {
+  background: var(--color-gold);
+  color: var(--color-white);
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search {
+  flex: 1;
+  min-width: 250px;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.filters select,
+.date-filter {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-gray-300);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.btn-clear {
+  padding: 0.75rem 1.5rem;
+  background: var(--color-gray-100);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-clear:hover {
+  background: var(--color-gray-200);
+}
+
+.stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  flex: 1;
+  background: var(--color-white);
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stat span {
+  font-size: 0.85rem;
+  color: var(--color-gray-700);
+}
+
+.stat strong {
+  font-size: 1.5rem;
+  color: var(--color-gold);
+}
+
+.table {
+  background: var(--color-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: var(--color-gray-50);
+}
+
+th {
+  text-align: left;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-gray-700);
+  border-bottom: 2px solid var(--color-gray-200);
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+tbody tr:hover {
+  background: var(--color-gray-50);
+}
+
+.date-cell,
+.client-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.date-cell strong,
+.client-cell strong {
+  color: var(--color-gray-900);
+}
+
+.date-cell span,
+.client-cell span {
+  font-size: 0.85rem;
+  color: var(--color-gray-600);
+}
+
+.services-cell {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.price {
+  font-weight: 700;
+  color: var(--color-gold);
+}
+
+.source {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--color-gray-100);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-select {
+  padding: 0.5rem;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--color-gray-100);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.btn-icon:hover {
+  background: var(--color-gray-200);
+  transform: scale(1.1);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.modal-content {
+  background: var(--color-white);
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+}
+
+.modal-header button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--color-gray-100);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.detail {
+  margin-bottom: 1.5rem;
+}
+
+.detail label {
+  display: block;
+  font-weight: 600;
+  color: var(--color-gray-700);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.detail p {
+  color: var(--color-gray-900);
+}
+
+.detail ul {
+  list-style: none;
+  padding: 0;
+}
+
+.detail li {
+  padding: 0.5rem;
+  background: var(--color-gray-50);
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+}
+
+.total {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-gold);
+}
+
+@media (max-width: 968px) {
+  .table {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 800px;
+  }
+}

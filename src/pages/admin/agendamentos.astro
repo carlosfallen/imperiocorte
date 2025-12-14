@@ -1,0 +1,29 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import AppointmentsManager from '../../components/admin/AppointmentsManager';
+import { Database } from '../../lib/db';
+
+const db = new Database(Astro.locals.runtime.env.DB);
+
+const url = new URL(Astro.request.url);
+const status = url.searchParams.get('status') || '';
+const date = url.searchParams.get('date') || '';
+
+const filters: any = {};
+if (status) filters.status = status;
+if (date) {
+  filters.startDate = date;
+  filters.endDate = date;
+}
+
+const appointments = await db.getAllAppointments(filters);
+const professionals = await db.getProfessionals(false);
+---
+
+<AdminLayout title="Agendamentos">
+  <AppointmentsManager 
+    client:load
+    appointments={appointments}
+    professionals={professionals}
+  />
+</AdminLayout>

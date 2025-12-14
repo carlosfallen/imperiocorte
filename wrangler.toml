@@ -1,0 +1,17 @@
+name = "imperio-corte"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "imperio-corte-db"
+database_id = "6265741d-49eb-456f-8f04-3150fcc998fc"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "imperio-corte-media"
+
+[vars]
+JWT_SECRET = "imperiocorte"
+WHATSAPP_NUMBER = "5511999999999"
+SALON_NAME = "Império Corte"

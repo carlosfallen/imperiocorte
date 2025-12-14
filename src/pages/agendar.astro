@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BookingFlow from '../components/BookingFlow';
+import { Database } from '../lib/db';
+
+const db = new Database(Astro.locals.runtime.env.DB);
+const services = await db.getServices({ isActive: true });
+const professionals = await db.getProfessionals(true);
+
+const url = new URL(Astro.request.url);
+const source = url.searchParams.get('src') || 'direto';
+const serviceId = url.searchParams.get('servico');
+---
+
+<BaseLayout title="Agendar Horário">
+  <Header />
+  
+  <main class="booking-page">
+    <div class="container">
+      <BookingFlow 
+        client:load 
+        services={services}
+        professionals={professionals}
+        initialSource={source}
+        initialServiceId={serviceId}
+      />
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import ServicesManager from '../../components/admin/ServicesManager';
+import { Database } from '../../lib/db';
+
+const db = new Database(Astro.locals.runtime.env.DB);
+const services = await db.getServices();
+const categories = await db.getCategories();
+---
+
+<AdminLayout title="Serviços">
+  <ServicesManager 
+    client:load
+    services={services}
+    categories={categories}
+  />
+</AdminLayout>
