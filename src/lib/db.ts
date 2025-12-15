@@ -6,6 +6,13 @@ import { generateId } from './auth';
 export class Database {
   constructor(private db: D1Database) {}
 
+  async updateAdminPassword(id: string, hash: string) {
+  return this.db.prepare(
+    'UPDATE admins SET password_hash = ? WHERE id = ?'
+  ).bind(hash, id).run();
+}
+
+
   async getUser(phone: string): Promise<User | null> {
     const result = await this.db.prepare('SELECT * FROM users WHERE phone = ?').bind(phone).first<User>();
     return result || null;

@@ -1,12 +1,10 @@
-// FILE: src/pages/api/admin/login.ts
 import type { APIRoute } from 'astro';
 import { Database } from '../../../lib/db';
 import { verifyPassword, createAdminToken } from '../../../lib/auth';
 
 export const POST: APIRoute = async ({ request, locals, cookies }) => {
   try {
-    const body = await request.json() as { email: string; password: string };
-    const { email, password } = body;
+    const { email, password } = await request.json();
 
     if (!email || !password) {
       return new Response(JSON.stringify({ error: 'E-mail e senha são obrigatórios' }), {
@@ -18,15 +16,24 @@ export const POST: APIRoute = async ({ request, locals, cookies }) => {
     const db = new Database(locals.runtime.env.DB);
     const admin = await db.getAdmin(email);
 
-    if (!admin || !(await verifyPassword(password, admin.password_hash))) {
-      return new Response(JSON.stringify({ error: 'Credenciais inválidas' }), {
+    if (!admin) {
+      return new Response(JSON.stringify({ error: 'E-mail não encontrado' }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    const isPasswordValid = await verifyPassword(password, admin.password_hash);
+
+    if (!isPasswordValid) {
+      return new Response(JSON.stringify({ error: 'Senha incorreta' }), {
         status: 401,
         headers: { 'Content-Type': 'application/json' }
       });
     }
 
     const token = await createAdminToken(admin.id, locals.runtime.env.JWT_SECRET);
-    
+
     cookies.set('admin_token', token, {
       httpOnly: true,
       secure: true,
@@ -39,6 +46,7 @@ export const POST: APIRoute = async ({ request, locals, cookies }) => {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
+
   } catch (error: any) {
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,

@@ -1,3 +1,5 @@
+
+// FILE: src/components/admin/SettingsManager.tsx
 import { createSignal } from 'solid-js';
 import styles from './SettingsManager.module.css';
 
